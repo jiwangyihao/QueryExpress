@@ -13,7 +13,8 @@
 
 ## Preview
 
-- 主页面
-  ![preview_index](preview_index.png)
-- 详情页
-  ![preview_detail](preview_detail.png)
+### 主页面
+![preview_index](preview_index.png)
+
+### 详情页
+![preview_detail](preview_detail.png)
