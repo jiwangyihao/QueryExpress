@@ -1,3 +1,5 @@
+import router from '@ohos.router'
+
 interface ExpressState {
   time: string
   content: string
@@ -28,6 +30,16 @@ struct Detail {
   build() {
     Row() {
       Column() {
+        Text("<  快递详情")
+          .fontSize(18)
+          .width('100%')
+          .margin({ top: 10, bottom: 20, left: 20 })
+          .textAlign(TextAlign.Start)
+          .fontColor('#017CFE')
+          .onClick(() => {
+            router.back()
+          })
+
         Row() {
           Image($r("app.media.express"))
             .margin({ top: 10, bottom: 10, right: 10 })
@@ -54,12 +66,11 @@ struct Detail {
         .width('100%')
         .margin({ bottom: 10 })
 
-        Text("送件历史")
+        Text("- 送件历史 -")
           .fontSize(16)
-          .fontWeight(FontWeight.Bold)
           .margin({ bottom: 10 })
 
-        Scroll(){
+        Scroll() {
           List({ space: 10, initialIndex: 0 }) {
             ForEach(this.Express.list, (item, index) => {
               ListItem() {
