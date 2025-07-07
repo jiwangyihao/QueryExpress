@@ -16,6 +16,17 @@ interface ListExpress {
   list: ExpressState[]
 }
 
+interface GeneratedTypeLiteralInterface_2 {
+  kuaidiname: string;
+  updatetime: string;
+  status: number;
+  list: ExpressState[];
+}
+
+interface GeneratedTypeLiteralInterface_1 {
+  result: GeneratedTypeLiteralInterface_2;
+}
+
 @Entry
 @Component
 struct Index {
@@ -29,18 +40,19 @@ struct Index {
         .height(40)
         .margin(20)
         .onSubmit((value: string) => {
-          httpRequest.request("https://apis.tianapi.com/kuaidi/index?key=25399a137b9d70936cf257ea9e33610b&number=" + value, {
+          httpRequest.request("https://apis.tianapi.com/kuaidi/index?key=25399a137b9d70936cf257ea9e33610b&number=" +
+            value, {
             header: {
               'Content-Type': 'application/json'
             }
           }).then((data) => {
             console.info('Result:' + data.result);
-            const res = JSON.parse(<string> data.result);
+            const res = JSON.parse(data.result as string) as GeneratedTypeLiteralInterface_1;
             let item: ListExpress = {
               number: value,
               comName: res.result.kuaidiname,
               updateTime: res.result.updatetime,
-              isExpressed: res.result.status>=4,
+              isExpressed: res.result.status >= 4,
               list: res.result.list
             }
             console.log(JSON.stringify(item))
@@ -51,7 +63,7 @@ struct Index {
               this.ExpressingList.push(item);
               AppStorage.Set('ExpressingList', this.ExpressingList);
             }
-          }).catch((err) => {
+          }).catch((err: Error) => {
             console.info('error:' + JSON.stringify(err));
           });
         })
@@ -59,7 +71,7 @@ struct Index {
         TabContent() {
           Column() {
             List({ space: 10, initialIndex: 0 }) {
-              ForEach(this.ExpressingList, (item, index) => {
+              ForEach(this.ExpressingList, (item: ListExpress) => {
                 ListItem() {
                   Row() {
                     Image($r("app.media.express"))
@@ -93,7 +105,7 @@ struct Index {
                     url: 'pages/Detail'
                   })
                 })
-              }, item => item)
+              }, (item: string) => item)
             }
             .padding(10)
           }.width('100%').height('100%')
@@ -102,7 +114,7 @@ struct Index {
         TabContent() {
           Column() {
             List({ space: 10, initialIndex: 0 }) {
-              ForEach(this.ExpressedList, (item, index) => {
+              ForEach(this.ExpressedList, (item: ListExpress) => {
                 ListItem() {
                   Row() {
                     Image($r("app.media.express"))
@@ -136,7 +148,7 @@ struct Index {
                     url: 'pages/Detail'
                   })
                 })
-              }, item => item)
+              }, (item: string) => item)
             }
             .padding(10)
           }.width('100%').height('100%')

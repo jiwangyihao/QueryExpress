@@ -72,7 +72,7 @@ struct Detail {
 
         Scroll() {
           List({ space: 10, initialIndex: 0 }) {
-            ForEach(this.Express.list, (item, index) => {
+            ForEach(this.Express.list, (item: ExpressState) => {
               ListItem() {
                 Row() {
                   Column() {
@@ -92,7 +92,7 @@ struct Detail {
                 .backgroundColor('#fff')
               }
               .width('100%')
-            }, item => item)
+            }, (item: string) => item)
           }
         }
         .flexShrink(1)
